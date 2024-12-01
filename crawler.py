@@ -12,7 +12,7 @@ title = soup.find("h1")
 paragraph = soup.find("p")
 links = soup.find_all("a")
 
-# create full urls with links
+# TODO:: create full urls with links
 
 
 print(f"Title: {title.text}")
