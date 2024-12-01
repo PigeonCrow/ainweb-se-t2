@@ -1,9 +1,11 @@
 import requests
 from bs4 import BeautifulSoup
 
-# def Pull requests -->  GET
+# Defne request to url -->  GET
 url = "https://vm009.rz.uos.de/crawl/index.html"
 response = requests.get(url)
+sub_urls = []
+
 # process with bs4
 soup = BeautifulSoup(response.content, "html.parser")
 
@@ -12,12 +14,22 @@ title = soup.find("h1")
 paragraph = soup.find("p")
 links = soup.find_all("a")
 
-# TODO:: create full urls with links
+# create full urls with links
+for link in links:
+    addr = link.get("href")
+    sub_urls.append(url + "/" + addr)
 
 
 print(f"Title: {title.text}")
 print("\n")
 print(f"Paragraph: {paragraph.text}")
 print("\n")
-for l in links:
-    print(f"link: {l.text}")
+
+# print(sub_urls)
+for i in range(len(links)):
+    print(f"link {i}: {links[i]}: {sub_urls[i]}")
+
+# for l in links:
+#    print(f"link: {l.text}")
+#    addr = l.get("href")
+#    print(f"address: {addr}")
