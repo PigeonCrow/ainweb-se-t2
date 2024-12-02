@@ -17,7 +17,7 @@ links = soup.find_all("a")
 # create full urls with links
 for link in links:
     addr = link.get("href")
-    base_url = url.rsplit('/', 1)[0]
+    base_url = url.rsplit("/", 1)[0]
     sub_urls.append(base_url + "/" + addr)
 
 
