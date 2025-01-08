@@ -15,10 +15,10 @@ def home():
 #search route of the flask app
 @app.route("/search")
 def search_route():
-    query_text = request.args.get("q", "") 
+    query_text = request.args.get("q", "") #get the search query
     if query_text:
-        result_html = search(query_text)  #use the search function of the crawler
-        return render_template("search.html", query=query_text, results=result_html) #render the template using the query that was put in
+        result_data = search(query_text)  #call the search function from crawler.py
+        return render_template("search.html", query=query_text, results=result_data) #render the template using the query that was put in
     else:
         return render_template("search.html", query=None, results=None) #render the template without having a query -> "no results found"
 

@@ -17,7 +17,7 @@ def crawl(url, base_url, visited_urls, writer):
     if url in visited_urls or urlparse(url).netloc != urlparse(base_url).netloc:
         return
 
-    print(f"crawling: {url}")
+    #print(f"crawling: {url}")
 
     try:
         # get page content
@@ -33,8 +33,19 @@ def crawl(url, base_url, visited_urls, writer):
         # process with bs4
         soup = BeautifulSoup(response.content, "html.parser")
 
+        # extract the title and teaser from the crawled page
+        title = soup.find("h1")
+        teaser = soup.find("p")
+
+        title_text = title.get_text(strip=True) if title else "No Title"
+        teaser_text = teaser.get_text(strip=True) if teaser else "No Teaser"
+        
         # index url
-        writer.add_document(url=url, content=soup.get_text())
+        writer.add_document(
+            url=url,
+            title=title_text,
+            teaser=teaser_text, 
+            content=soup.get_text())
 
         # find all links
         links = soup.find_all("a")
@@ -59,7 +70,11 @@ def crawl(url, base_url, visited_urls, writer):
 
 # create index using whoosh
 # schema for the index
-schema = Schema(url=ID(stored=True), content=TEXT)
+schema = Schema(
+    url=ID(stored=True),
+    title=TEXT(stored=True),
+    teaser=TEXT(stored=True), 
+    content=TEXT)
 
 # index directory
 if not os.path.exists("index_dir"):
@@ -84,12 +99,13 @@ def search(query_text):
     with ix.searcher() as searcher:
         query = QueryParser("content", ix.schema).parse(query_text)
         results = searcher.search(query)
-        result_urls = [result["url"] for result in results]
-        if not result_urls:
-            return "<p>No results found.</p>"
-        result_html = "<br>".join([f"<a href='{url}'>{url}</a>"])
-        return result_html
-        #return [(result["url"]) for result in results]
+        result_data = [
+            { "url": result["url"],
+             "title": result.get("title", "No Title"),
+              "teaser": result.get("teaser", "No Teaser")}
+            for result in results]
+        # return results including title, teaser and url
+        return result_data
 
 
 # Testing the search:
