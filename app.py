@@ -5,7 +5,7 @@ from crawler import search
 
 #building the flask app
 app = Flask(__name__)
-#ix = open_dir("index_dir")
+ix = open_dir("index_dir")
 
 #home route of the flask app
 @app.route("/")
