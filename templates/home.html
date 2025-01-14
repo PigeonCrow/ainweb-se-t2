@@ -1,39 +1,66 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>
             Search Engine  
-        </title> 
+        </title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">        
         <style>
-            body { font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; margin:auto; text-align: center;}
-            input[ type="text" ] {width: 50%; padding: 10px; margin: auto;}
-            input[ type="submit" ] {padding: 10px 20px;}
+            body {
+                background-color: aliceblue; 
+                font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; 
+                margin:auto; 
+                text-align: center;}
+            h1 {
+                font-size: 3rem;
+                font-weight: bold;
+                color: darkblue;
+            }
+            .search-container {
+                margin-top: 5rem;
+            }
+            .input {
+                width: 100%;
+                width: 600px;
+                border: 2px solid blue;
+                height: 2.5rem;
+                font-size: medium;
+            }
+            .field {
+                justify-content: center;
+            }
+            .control.has-icons-left.input {
+                padding-left: 2.5rem;
+            }
+            .icon.is-small.is-left {
+                left: 10px;
+                top: 50%;
+                transform: translateY(-50%);
+                color: darkblue;
+            }
         </style>
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     </head>
-    <style>
-        .button {
-            padding: 12px 24px;
-            text-align: center;
-            font-size: medium;
-            margin: auto;
-            background-color: wheat;
-            color: darkslategray;
-            border: 2px solid;
-        }
-    </style>
-    <body style="background-color: antiquewhite;">
-        <br/><br/> 
-        <h1>Search Engine</h1> 
-        <br/><br/> 
-        <i class="fa fa-search" style="font-size: xx-large;"></i>
-        <br/><br/>
-        <br/><br/>
-        <form action="/search" method="get"> 
-            <input name="q" type="text" placeholder="Enter your search term." required> 
-            <button class="button" type="submit">Search!</button>
-        </form>
+    <body>
+        <section class="section">
+            <div class="container search-container">
+                <h1>Search Engine</h1>
+                <br/><br/>
+                <form action="/search" method="get" class="mt-5">
+                    <div class="field is-grouped is-grouped-centered">
+                    <div class="control has-icons-left">
+                        <input class="input is-rounded is-info" name="q" type="text" placeholder="Enter your search term." />
+                        <span class="icon is-small is-left">
+                            <i class="fa fa-search"></i>
+                        </span>
+                    </div>
+                        <button type="submit" class="button is-info">Search!</button>
+                    </div>
+                </form>
+            </div>
+        </section>
     </body>
 </html>
 

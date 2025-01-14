@@ -1,35 +1,96 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <title>
             Search Results 
         </title>
         <style>
-            body { font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; margin:auto; text-align: center;}
+            body { 
+                background-color: aliceblue;
+                font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; 
+                margin:auto; 
+                text-align: center;
+            }
+            h1 {
+                font-size: 2.5rem;
+                font-weight: bold;
+                color: darkblue;
+                margin-bottom: 2rem;
+            }
             a {text-decoration: none; color: black;}
             a:hover {text-decoration: double;}
-            .result {margin-bottom: 20px;}
-            .result h2 {margin: 0; color: darkslateblue;}
-            .result a {margin: 0; color: darkslateblue;}
-            .result p {margin: 5px 0; color: darkslategray;}
+            .result {
+                border: 1px solid lightblue;
+                border-radius: 8px;
+                padding: 1.5rem;
+                margin: 1rem auto;
+                max-width: 900px;
+                background-color: white;
+                box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+            }
+            .result h2 {
+                font-size: 1.5rem; 
+                color: darkslateblue;
+            }
+            .result a {
+                text-decoration: none; 
+                color: darkslateblue;
+            }
+            .result a:hover {
+                text-decoration: underline;
+                color: darkblue;
+            }
+            .result p {
+                margin-top: 0.5rem;
+                font-size: 1rem; 
+                color: darkslategray;
+            }
+            .back-link {
+                display: inline-block;
+                margin-top: 2rem;
+                font-weight: bold;
+                color: darkblue;
+                text-decoration: none;
+                font-size: 1.2rem;
+            }
+            .back-link:hover {
+                text-decoration: underline;
+            }
+            .control {
+                max-width: 700px;
+                margin: auto;
+                border: solid lightblue;
+                border-width: 1px;
+            }
         </style>
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     </head>
-    <body style="background-color: antiquewhite;">
-        <h1>Search Results for "{{ query }}":</h1>
-        {% if results %}
-            {% for result in results %}
-                <div class="result">
-                    <br/><br/> 
-                    <h2><i class="fa fa-link" style="font-size:20px;color:darkslateblue"></i> <a href="{{ result.url }}">{{result.title}}</a></h2>
-                    <p>{{result.teaser}}</p>
+    <body>
+        <section class="section">
+            <div class="container">
+                <h1>Search Results:</h1>
+                <div class="control">
+                    <input class="input is-small" type="text" value={{query}} readonly />
                 </div>
-            {% endfor %}
-        {% else %}
-            <p>No results found.</p>
-        {% endif %}
-        <br/><br/>
-        <a href="/" style="font-weight: bold;"><i class="fa fa-arrow-left"></i> Back to Search</a> 
+                <br/><br/>
+                {% if results %}
+                    {% for result in results %}
+                        <div class="result">
+                            <h2><i class="fa fa-link"></i> <a href="{{ result.url }}" target="_blank">{{result.title}}</a></h2>
+                            <p>{{result.teaser}}</p>
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    <p>No results found.</p>
+                {% endif %}
+                <br/><br/>
+                <a href="/" class="back-link">
+                    <i class="fa fa-arrow-left"></i> Back to Search
+                </a> 
+            </div>
+        </section>
     </body>
 </html>
