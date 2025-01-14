@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            Search Results
+        </title>
+        <style>
+            body { font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; margin:auto; text-align: center;}
+            a {text-decoration: none; color: black;}
+            a:hover {text-decoration: double;}
+            .result {margin-bottom: 20px;}
+            .result h2 {margin: 0; color: darkslateblue;}
+            .result a {margin: 0; color: darkslateblue;}
+            .result p {margin: 5px 0; color: darkslategray;}
+        </style>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    </head>
+    <body style="background-color: antiquewhite;">
+        <h1>Search Results for "{{ query }}":</h1>
+        {% if results %}
+            {% for result in results %}
+                <div class="result">
+                    <br/><br/>
+                    <h2><i class="fa fa-link" style="font-size:20px;color:darkslateblue"></i> <a href="{{ result.url }}">{{result.title}}</a></h2>
+                    <p>{{result.teaser}}</p>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p>No results found.</p>
+        {% endif %}
+        <br/><br/>
+        <a href="/" style="font-weight: bold;"><i class="fa fa-arrow-left"></i> Back to Search</a>
+    </body>
+</html>%
