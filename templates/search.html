@@ -123,6 +123,15 @@
                 transform: scale(1.1);
                 box-shadow: 0 0 15px rgba(0,0,0,0.2);
             }
+            .no-results-image {
+                width: 200px;  
+                height: 200px;
+                border-radius: 50%;
+                object-fit: cover;
+                border: 3px solid black;
+                margin: 1rem 0;
+            }
+
         </style>
     </head>
     <body>
@@ -151,6 +160,7 @@
                     {% endfor %}
                 {% else %}
                     <p>No results found.</p>
+                    <img src="{{ url_for('static', filename='img/no_results.png') }}" alt="No results found" class="no-results-image">
                 {% endif %}
                 <br/><br/>
                 <a href="/" class="back-link">
