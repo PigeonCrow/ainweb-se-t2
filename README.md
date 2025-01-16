@@ -1,5 +1,7 @@
 # Search Engine: "Inert Pigeon"
 
+![inert pigeon flies low ...](static/img/pgn_logo.png)
+
 ***project created in the scope of Task II, for the Seminar "AI & The Web", by Group 14*** 
 
 
@@ -64,3 +66,5 @@ The search.html contains all the information how and in which way to display the
 ### Index Directory
 In index_dir, the indexed data is stored. It is used for the search to compare with the search term.
 
+### Static Directory
+static images used 
