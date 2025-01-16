@@ -1,14 +1,17 @@
 import requests
+import os
 from bs4 import BeautifulSoup
 from whoosh.index import create_in
 from whoosh.fields import *
 from whoosh.qparser import QueryParser
-import os
 from urllib.parse import urljoin, urlparse
 
 # Defne request to url --> GET
 url = "https://vm009.rz.uos.de/crawl/index.html"
 # response = requests.get(url)
+
+# define index variable globally
+# ix = None
 
 
 ## define crawler to search recursively
@@ -17,8 +20,7 @@ def crawl(url, base_url, visited_urls, writer):
     if url in visited_urls or urlparse(url).netloc != urlparse(base_url).netloc:
         return
 
-    #print(f"crawling: {url}")
-
+    # print(f"crawling: {url}")
     try:
         # get page content
         response = requests.get(url)
@@ -36,16 +38,13 @@ def crawl(url, base_url, visited_urls, writer):
         # extract the title and teaser from the crawled page
         title = soup.find("h1")
         teaser = soup.find("p")
-
         title_text = title.get_text(strip=True) if title else "No Title"
         teaser_text = teaser.get_text(strip=True) if teaser else "No Teaser"
-        
+
         # index url
         writer.add_document(
-            url=url,
-            title=title_text,
-            teaser=teaser_text, 
-            content=soup.get_text())
+            url=url, title=title_text, teaser=teaser_text, content=soup.get_text()
+        )
 
         # find all links
         links = soup.find_all("a")
@@ -70,28 +69,38 @@ def crawl(url, base_url, visited_urls, writer):
 
 # create index using whoosh
 # schema for the index
-schema = Schema(
-    url=ID(stored=True),
-    title=TEXT(stored=True),
-    teaser=TEXT(stored=True), 
-    content=TEXT)
+def init_set_up():
+    print("Setup SE ....")
+    schema = Schema(
+        url=ID(stored=True),
+        title=TEXT(stored=True),
+        teaser=TEXT(stored=True),
+        content=TEXT,
+    )
 
-# index directory
-if not os.path.exists("index_dir"):
-    os.makedirs("index_dir")
+    # index directory
+    if not os.path.exists("index_dir"):
+        os.makedirs("index_dir")
 
-# generate the index
-ix = create_in("index_dir", schema)
+    print("Index directory verified ....")
+    global ix
+    # generate the index
+    ix = create_in("index_dir", schema)
 
-# Initialize writer and visited_urls set
-writer = ix.writer()
-visited_urls = set()
+    print("Index created ....")
 
-# Start the crawling process
-crawl(url, url, visited_urls, writer)
+    # Initialize writer and visited_urls set
+    writer = ix.writer()
+    visited_urls = set()
 
-# Commit the changes to the index
-writer.commit()
+    # Start the crawling process
+    crawl(url, url, visited_urls, writer)
+
+    # Commit the changes to the index
+    writer.commit()
+
+    print("Index written ....")
+    print("Setup completed!!")
 
 
 # search for text
@@ -100,20 +109,23 @@ def search(query_text):
         query = QueryParser("content", ix.schema).parse(query_text)
         results = searcher.search(query)
         result_data = [
-            { "url": result["url"],
-             "title": result.get("title", "No Title"),
-              "teaser": result.get("teaser", "No Teaser")}
-            for result in results]
+            {
+                "url": result["url"],
+                "title": result.get("title", "No Title"),
+                "teaser": result.get("teaser", "No Teaser"),
+            }
+            for result in results
+        ]
         # return results including title, teaser and url
         return result_data
 
 
 # Testing the search:
 # search 1
-print(search("scientists")) #returns an URL
+# print(search("scientists")) #returns an URL
 
 # search 2
-print(search("Senat")) #returns "No results found"
+# print(search("Senat")) #returns "No results found"
 
 # search 3
-print(search("pixels")) #returns an URL
+# print(search("pixels")) #returns an URL
