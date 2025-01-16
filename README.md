@@ -1,6 +1,14 @@
 # Search Engine: "Inert Pigeon"
 
-![inert pigeon flies low ...](static/img/pgn_logo.png)
+<p align="center">
+  <img src="static/img/pgn_logo.png" alt="inert_pigeon"/ width="200" height="200">
+</p>
+<p align="center">
+  <em>inert pigeon flies low ...</em>
+</p>
+
+
+
 
 ***project created in the scope of Task II, for the Seminar "AI & The Web", by Group 14*** 
 
