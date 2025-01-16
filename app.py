@@ -1,12 +1,10 @@
 from flask import Flask, request, render_template
-from whoosh.columns import write_qsafe_array
-from whoosh.index import open_dir
-from crawler import search
+from search import search, init_search
 from crawler import init_set_up
 
 # building the flask app
 app = Flask(__name__)
-ix = open_dir("index_dir")
+# ix = open_dir("index_dir")
 
 
 # config setup
@@ -81,5 +79,8 @@ def search_route():
 
 
 if __name__ == "__main__":
+    # initialize crawler and write index
     init_set_up()
+    # initialize search
+    init_search()
     app.run(debug=True)

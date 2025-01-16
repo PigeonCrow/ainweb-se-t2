@@ -3,7 +3,6 @@ import os
 from bs4 import BeautifulSoup
 from whoosh.index import create_in
 from whoosh.fields import *
-from whoosh.qparser import QueryParser
 from urllib.parse import urljoin, urlparse
 
 # Defne request to url --> GET
@@ -104,20 +103,20 @@ def init_set_up():
 
 
 # search for text
-def search(query_text):
-    with ix.searcher() as searcher:
-        query = QueryParser("content", ix.schema).parse(query_text)
-        results = searcher.search(query)
-        result_data = [
-            {
-                "url": result["url"],
-                "title": result.get("title", "No Title"),
-                "teaser": result.get("teaser", "No Teaser"),
-            }
-            for result in results
-        ]
-        # return results including title, teaser and url
-        return result_data
+# def search(query_text):
+#    with ix.searcher() as searcher:
+#        query = QueryParser("content", ix.schema).parse(query_text)
+#        results = searcher.search(query)
+#        result_data = [
+#            {
+#                "url": result["url"],
+#                "title": result.get("title", "No Title"),
+#                "teaser": result.get("teaser", "No Teaser"),
+#            }
+#            for result in results
+#        ]
+#        # return results including title, teaser and url
+#        return result_data
 
 
 # Testing the search:
@@ -128,4 +127,7 @@ def search(query_text):
 # print(search("Senat")) #returns "No results found"
 
 # search 3
-# print(search("pixels")) #returns an URL
+# print(search("pixels")) #returns an url
+
+# to execute crawler independently
+init_set_up()
