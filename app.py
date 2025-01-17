@@ -1,6 +1,8 @@
 from flask import Flask, request, render_template
 from search import init_search, search
 from crawler import init_set_up
+import traceback
+
 
 # building the flask app
 app = Flask(__name__)
@@ -76,6 +78,13 @@ def search_route():
         return render_template(
             "search.html", query=None, results=None
         )  # render the template without having a query -> "no results found"
+
+
+## for debug
+# import traceback
+@app.errorhandler(500)
+def internal_error(exception):
+    return "<pre>" + traceback.format_exc() + "</pre>"
 
 
 if __name__ == "__main__":
