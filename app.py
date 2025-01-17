@@ -75,7 +75,7 @@ def profile(username):
 def search_route():
     query_text = request.args.get("q", "")  # get the search query
     if query_text:
-        result_data = search(query_text)  # call the search function from crawler.py
+        result_data = search(query_text)  # call the search function
         return render_template(
             "search.html", query=query_text, results=result_data
         )  # render the template using the query that was put in
