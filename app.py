@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template
+from flask import Flask, request, render_template, url_for
 from search import init_search, search
 from crawler import init_set_up
 import traceback
@@ -63,6 +63,12 @@ app = Flask(__name__)
 @app.route("/")
 def home():
     return render_template("home.html")
+
+
+# fixing root urls ref
+@app.route("/user/u016")
+def profile(username):
+    return f"User: {username}"
 
 
 # search route of the flask app
