@@ -72,7 +72,7 @@ def profile(username):
 
 
 # search route of the flask app
-@app.route("/search")
+@app.route("~/search")
 def search_route():
     query_text = request.args.get("q", "")  # get the search query
     if query_text:
