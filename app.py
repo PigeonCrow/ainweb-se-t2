@@ -1,5 +1,5 @@
 from flask import Flask, request, render_template
-from search import search, init_search
+from search import init_search, search
 from crawler import init_set_up
 
 # building the flask app
