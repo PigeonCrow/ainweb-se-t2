@@ -2,6 +2,7 @@ from flask import Flask, request, render_template, url_for
 from ainweb_se_t2.search import init_search, search  # change for server deployment
 import traceback
 
+init_search()
 
 # building the flask app
 app = Flask(__name__)
@@ -94,5 +95,5 @@ def internal_error(exception):
 
 if __name__ == "__main__":
     # initialize search
-    init_search()
+    # init_search()
     app.run(debug=True)
