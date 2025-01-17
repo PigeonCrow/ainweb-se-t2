@@ -26,7 +26,7 @@ The root of the search is hardcoded, limited to the test site https://vm009.rz.u
 ### app.py:
 
 The app.py is the entry point of our project.
-It when started initialises crawler and the created index for the Search.
+It when started initialises the created index for the Search.
 It contains the actual Flask web application, consisting of the two app routes:1. „/„ -> home
 The home route uses the template „home.html“ when called to display the search form.
 2. „/search“ -> search
@@ -45,6 +45,7 @@ It skips pages if they have different domains or were visited already and only l
 BeautifulSoup is used to parse the content.
 Besides the URL, also the title and the teaser are being extracted to use later in the templates/forms.
 The schema defines the fields url, title, teaser and content which are then stored in the generated index.
+The Crawler can be if included, initilised, explicitly or by another application aswell (to create/re-create the index)  
 
 To use the crawler for a differnt site one needs just to edit the url parameter
 ```

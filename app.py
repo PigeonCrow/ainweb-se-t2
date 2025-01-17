@@ -1,6 +1,5 @@
 from flask import Flask, request, render_template, url_for
 from search import init_search, search
-from crawler import init_set_up
 import traceback
 
 
@@ -94,8 +93,6 @@ def internal_error(exception):
 
 
 if __name__ == "__main__":
-    # initialize crawler and write index
-    init_set_up()
     # initialize search
     init_search()
     app.run(debug=True)
