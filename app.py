@@ -1,5 +1,5 @@
 from flask import Flask, request, render_template, url_for
-from search import init_search, search
+from ainweb_se_t2.search import init_search, search  # change for server deployment
 import traceback
 
 
