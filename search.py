@@ -8,7 +8,7 @@ ix = None
 # init index pointer explicitly for search
 def init_search():
     global ix
-    ix = open_dir("index_dir")
+    ix = open_dir("ainweb_se_t2/index_dir")  # add reference for server deployment
     print("search initialized!!!")
 
 
