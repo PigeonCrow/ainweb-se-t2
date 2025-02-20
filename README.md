@@ -14,7 +14,7 @@
 
 
 ## About
-A small search engine, its logic its build with Python, utilising the libraries BeautifulSoup and Woosh. 
+A small search engine, its logic is build with Python, utilising the libraries BeautifulSoup and Woosh. 
 Flask framework is used to manage the webservice and for frontend design(CSS templating) Bulma(https://bulma.io/) was applied.
 
 ## Scope
