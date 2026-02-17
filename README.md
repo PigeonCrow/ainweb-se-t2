@@ -9,9 +9,13 @@
 
 
 
-
-***project created in the scope of Task II, for the Seminar "AI & The Web", by Group 14*** 
-
+<sup>
+  <sup>
+    <sup>
+      <sup><emph>project created in the scope of Task II, for the Seminar "AI & The Web", by Group 14</emph></sup>
+    </sup>
+  </sup>  
+</sup>
 
 ## About
 A small search engine, its logic is build with Python, utilising the libraries BeautifulSoup and Woosh. 
